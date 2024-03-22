@@ -1,3 +1,22 @@
+# Magic Task App
+
+Magic Task is a task management web application built using Next.js. Below you will find instructions on how to set up and run the app locally.
+
+## Prerequisites
+
+Before running the app, make sure you have the following installed:
+
+- Node.js (version 14 or later)
+- npm or yarn
+
+## Installation
+
+1. Clone this repository to your local machine:
+
+   ```bash
+   git clone https://github.com/your-username/magic-task.git
+   ```
+
 # Task List Component
 
 This component is designed to display a list of tasks. Each task is represented with its priority level, title, description, due date, creation date, and status. The component also provides functionality for deleting tasks.
