@@ -1,35 +1,40 @@
-# <a href="https://www.udemy.com/course/nextjs14-taskapp/?couponCode=DD85199B00481F602C1F" target="_blank">Updated Version Task Application using Typscript</a>
+# Task List Component
 
-Want to take this project to the next level join our <a href="https://www.udemy.com/course/nextjs14-taskapp/?couponCode=DD85199B00481F602C1F" target="_blank">
-Udemy Course</a>. Support the channel for only $13
+This component is designed to display a list of tasks. Each task is represented with its priority level, title, description, due date, creation date, and status. The component also provides functionality for deleting tasks.
 
-- New Features
-  - Prisma
-  - Typscript
-  - Server Side Pagination
-- Future Updates
-  - Server Actions
-  - Deployment
-  - Any new Next.js 14 features
+## Components Used
 
-<a href="https://www.youtube.com/claritycoders" target="_blank">Clarity Coders YouTube</a>
+- **StatusDisplay**: Component to display the status of a task.
+- **PriorityDisplay**: Component to display the priority level of a task.
+- **DeleteBlock**: Component for deleting a task.
+- **Link**: Component from Next.js for routing.
 
-# NextJS 13.4 Example App!
+## TaskList Component
 
-- Simple CRUD app to showcase how to use 13.4 app router
-- Tech Stack
-  - Tailwind CSS
-  - fontawesome
-  - MongoDB
-  - Mongoose
+The `TaskList` component is responsible for rendering the list of tasks. It takes a `task` object as a prop, which contains details of the task to be displayed. It formats the creation date of the task and renders each task in a table format with checkboxes for selection, priority level, title, description, due date, creation date, status, and a delete button.
 
-# Want to add authentication? Check out our free Udemy Course! Next Auth Tutorial Video
+## StatusDisplay Component
 
-- Free Using link below.
-- Covers rolling your own auth system and using providers like github and google.
-- An FREE! Updated version can be found on Udemy by clicking the link <a href="https://www.udemy.com/course/nextauth-nextjs-cc/?couponCode=C9622654181134A4AE79" target="_blank">Free Udemy Course</a>
+The `StatusDisplay` component is used to display the status of a task. It receives the status of the task as a prop and dynamically sets the background color based on the status. The status can be one of "Done", "Started", or "Not Started".
 
-## Contact!
+## PriorityDisplay Component
 
-- YouTube <a href="https://www.youtube.com/claritycoders" target="_blank">Clarity Coders</a>
-- Chat with me! <a href="https://discord.gg/cAWW5qq" target="_blank">Discord</a>
+The `PriorityDisplay` component is used to display the priority level of a task. It receives the priority level of the task as a prop and displays circles representing the priority level. The color of the circles changes based on the priority level.
+
+## API Routes
+
+The code includes API routes for performing CRUD operations on tasks:
+
+- **GET /api/task/:id**: Retrieves a specific task by its ID.
+- **PUT /api/task/:id**: Updates an existing task with new data.
+- **DELETE /api/task/:id**: Deletes a task.
+- **GET /api/tasks**: Retrieves all tasks.
+- **POST /api/tasks**: Creates a new task.
+
+## MongoDB Task Model
+
+The `Task` model is defined using Mongoose for MongoDB. It defines the schema for tasks, including fields like title, description, category, priority, status, active, and dueDate. It also includes timestamps for creation and updating.
+
+## Task Page
+
+The `TaskPage` component is responsible for displaying the form to edit or create a task. It fetches task data based on the provided ID and passes it to the `EditTaskForm` component.
