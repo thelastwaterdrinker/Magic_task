@@ -3,24 +3,56 @@ import PriorityDisplay from "./PriorityDisplay";
 import DeleteBlock from "./DeleteBlock";
 import Link from "next/link";
 
-const TaskList = ({ task }) => {
-  function formatTimestamp(timestamp) {
-    const options = {
-      year: "numeric",
-      month: "2-digit",
-      day: "2-digit",
-    };
+function formatTimestamp(timestamp) {
+  const options = {
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  };
 
-    const date = new Date(timestamp);
-    const formattedDate = date.toLocaleString("en-GB", options);
+  const date = new Date(timestamp);
+  const formattedDate = date.toLocaleString("en-GB", options);
 
-    return formattedDate;
-  }
+  return formattedDate;
+}
 
+const TaskRow = ({ task }) => {
   const createdDateTime = formatTimestamp(task.createdAt);
 
   return (
-    <div className="hover:bg-task-hover bg-task rounded-md shadow-lg flex flex-col">
+    <tbody className="hover:bg-task-hover">
+      <tr>
+        <td>
+          <input type="checkbox" className="checkbox" />
+        </td>
+        <td>
+          <Link href={`/TaskPage/${task._id}`} className="flex">
+            <PriorityDisplay priority={task.priority} />
+          </Link>
+        </td>
+        <td>
+          <Link href={`/TaskPage/${task._id}`} className="flex">
+            {task.title}
+          </Link>
+        </td>
+        <td>{task.description}</td>
+        <td>{formatTimestamp(task.dueDate)}</td>
+        <td>{createdDateTime}</td>
+        <td>
+          <StatusDisplay status={task.status} className="flex" />
+        </td>
+        <td>{task.category}</td>
+        <td className="ml-auto flex flex-end m-3">
+          <DeleteBlock id={task._id} />
+        </td>
+      </tr>
+    </tbody>
+  );
+};
+
+const TaskList = ({ tasks }) => {
+  return (
+    <div className="bg-task rounded-md shadow-lg flex flex-col">
       <table className="table">
         <thead>
           <tr>
@@ -31,34 +63,12 @@ const TaskList = ({ task }) => {
             <th>Due date</th>
             <th>Created</th>
             <th>Status</th>
+            <th>Category</th>
           </tr>
         </thead>
-        <tbody>
-          <tr>
-            <td>
-              <input type="checkbox" className="checkbox" />
-            </td>
-            <td>
-              <Link href={`/TaskPage/${task._id}`} className="flex">
-                <PriorityDisplay priority={task.priority} />
-              </Link>
-            </td>
-            <td>
-              <Link href={`/TaskPage/${task._id}`} className="flex">
-                {task.title}
-              </Link>
-            </td>
-            <td>{task.description}</td>
-            <td>Due date</td>
-            <td>{createdDateTime}</td>
-            <td>
-              <StatusDisplay status={task.status} />
-            </td>
-            <td className="ml-auto flex flex-end m-3">
-              <DeleteBlock id={task._id} />
-            </td>
-          </tr>
-        </tbody>
+        {tasks.map((task) => (
+          <TaskRow task={task} />
+        ))}
       </table>
     </div>
   );

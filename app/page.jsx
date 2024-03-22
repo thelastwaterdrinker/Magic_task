@@ -32,19 +32,9 @@ const Dashboard = async () => {
   return (
     <div className="p-5">
       <div>
-        {tasks &&
-          uniqueCategories?.map((uniqueCategory, categoryIndex) => (
-            <div key={categoryIndex} className="mb-4">
-              <h2>{uniqueCategory}</h2>
-              <div>
-                {tasks
-                  .filter((task) => task.category === uniqueCategory)
-                  .map((filteredTask, _index) => (
-                    <TaskList id={_index} key={_index} task={filteredTask} />
-                  ))}
-              </div>
-            </div>
-          ))}
+        <div>
+          <TaskList tasks={tasks} />
+        </div>
       </div>
     </div>
   );

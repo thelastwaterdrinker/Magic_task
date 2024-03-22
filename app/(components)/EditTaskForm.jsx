@@ -5,6 +5,7 @@ import DatePicker from "react-datepicker";
 
 const EditTaskForm = ({ task }) => {
   const EDITMODE = task._id === "new" ? false : true;
+  console.log(EDITMODE);
   const [startDate, setStartDate] = useState(new Date());
   const router = useRouter();
   const startingTaskData = {
@@ -12,7 +13,7 @@ const EditTaskForm = ({ task }) => {
     description: "",
     priority: 1,
     status: "not started",
-    category: "Hardware Problem",
+    category: "Frontend",
     dueDate: "",
   };
 
@@ -22,7 +23,7 @@ const EditTaskForm = ({ task }) => {
     startingTaskData["priority"] = task.priority;
     startingTaskData["status"] = task.status;
     startingTaskData["category"] = task.category;
-    startingTaskData["dueDate"] = task.category;
+    startingTaskData["dueDate"] = task.dueDate;
   }
 
   const [formData, setFormData] = useState(startingTaskData);
@@ -159,9 +160,14 @@ const EditTaskForm = ({ task }) => {
         <div>
           <label>Due Date</label>
           <DatePicker
+            id="dueDate"
+            name="dueDate"
             selected={startDate}
-            onChange={handleChange}
-            value={formData.category}
+            onChange={(date) => {
+              setStartDate(date);
+              formData.dueDate = date;
+            }}
+            value={startDate}
           />
         </div>
 
